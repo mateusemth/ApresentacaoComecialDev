@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apresentação - Engenharia de Valor na Domtec</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fira+Code:wght@500&display=swap');
+        .fira-code {
+            font-family: 'Fira Code', monospace;
+        }
+        .slide {
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
+            width: 100%;
+            height: 100%;
+        }
+        .slide.active {
+            display: flex;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .progress-dot {
+            transition: background-color 0.3s ease;
+        }
+        #presentation-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 flex flex-col items-center justify-center min-h-screen p-4 overflow-x-hidden">
+
+    <main id="presentation-container" class="w-full max-w-5xl bg-white rounded-2xl shadow-2xl flex flex-col p-4 sm:p-8 md:p-12 transition-all duration-300 h-auto min-h-[75vh] sm:h-[85vh] sm:max-h-[800px]">
+        
+    </main>
+
+    <footer class="w-full max-w-5xl mt-4 sm:mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="w-full sm:w-1/3 text-center sm:text-left order-2 sm:order-1">
+             <span id="slide-counter" class="text-sm font-semibold text-slate-500"></span>
+        </div>
+        <div class="w-full sm:w-auto flex items-center justify-center space-x-4 order-1 sm:order-2">
+            <button id="prev-btn" class="w-10 h-10 flex items-center justify-center bg-white rounded-full shadow-md text-slate-700 hover:bg-slate-50 transition disabled:opacity-50 disabled:cursor-not-allowed">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"/></svg>
+            </button>
+            <div id="progress-dots" class="flex items-center space-x-2"></div>
+            <button id="next-btn" class="w-10 h-10 flex items-center justify-center bg-sky-600 rounded-full shadow-md text-white hover:bg-sky-700 transition disabled:opacity-50">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>
+            </button>
+        </div>
+        <div class="hidden sm:block w-1/3 order-3">
+            </div>
+    </footer>
+
+    <script>
+        const slidesData = [
+            {
+                title: "Engenharia de Valor",
+                subtitle: "O Papel Estratégico do Desenvolvimento na Domtec",
+                content: "Um alinhamento sobre como nosso trabalho diário constrói a base para o sucesso dos nossos clientes e da nossa empresa.",
+                visual: () => `<div class="text-6xl flex items-center space-x-3"><span>⚙️</span><span class="text-sky-500 text-4xl">+</span><span>💎</span></div>`
+            },
+            {
+                title: "O Ecossistema Domtec",
+                subtitle: "Como o Desenvolvimento habilita cada setor",
+                content: `<ul class="list-none space-y-3 text-left">
+                    <li><span class="font-bold text-sky-700">Comercial:</span> Oferece uma solução que nós construímos para ser confiável e atrativa.</li>
+                    <li><span class="font-bold text-sky-700">Implantação:</span> Transforma em realidade a solução que nós projetamos para ser flexível.</li>
+                    <li><span class="font-bold text-sky-700">Suporte e Ouvidoria:</span> Contam com a estabilidade e as ferramentas que nós criamos para garantir a satisfação do cliente.</li>
+                </ul>
+                <p class="mt-6 font-semibold text-center">Nós não somos um setor isolado. Somos a plataforma que potencializa todos os outros.</p>`,
+                visual: () => `<div class="text-8xl">🌐</div>`
+            },
+            {
+                title: "Nossa Visão de Negócio",
+                subtitle: "É a engenharia por trás do sucesso do cliente",
+                content: `Nossa contribuição estratégica vai além do código. Ela se manifesta em três frentes:
+                <ul class="list-disc list-inside space-y-2 mt-4">
+                    <li><strong>Garantir a Continuidade do Negócio:</strong> Nosso software é o coração da operação do cliente. Estabilidade é nossa prioridade.</li>
+                    <li><strong>Construir Valor Percebido:</strong> Nossas soluções devem ser eficientes, intuitivas e resolver problemas reais de forma elegante.</li>
+                    <li><strong>Habilitar o Futuro:</strong> Um software bem arquitetado permite que a Domtec e seus clientes inovem, cresçam e se mantenham competitivos.</li>
+                </ul>`,
+                visual: () => `<div class="w-32 h-24 flex items-center justify-center space-x-4"><div class="text-6xl">⚙️</div><div class="text-3xl text-slate-300">➔</div><div class="text-6xl text-green-500">📈</div></div>`
+            },
+            {
+                title: "O Yzidro: Nosso Motor e Responsabilidade",
+                subtitle: "A importância estratégica do nosso produto",
+                content: `<ul class="list-disc list-inside space-y-2">
+                    <li>O Yzidro ERP é a <strong>ferramenta central e única</strong> para a operação completa dos nossos clientes.</li>
+                    <li>Uma falha técnica não é um bug isolado; representa um <strong>risco direto à operação do cliente</strong> (faturamento, logística, financeiro).</li>
+                    <li>Somos a engrenagem primordial. O impacto de cada alteração deve ser avaliado sob a ótica da <strong>continuidade e eficiência do negócio do cliente</strong>.</li>
+                </ul>`,
+                visual: () => `<div class="text-8xl relative flex items-center justify-center"><div class="absolute animate-ping text-sky-300">⚙️</div><div class="text-sky-600">⚙️</div></div>`
+            },
+            {
+                title: "Traduzindo Visão em Ação",
+                subtitle: "Três Pilares para a Excelência Diária",
+                content: `Vamos focar em três áreas que transformam nossa mentalidade estratégica em ações de alta qualidade e impacto real.`,
+                visual: () => `<div class="w-full h-full flex items-center justify-around text-center text-slate-700">
+                    <div class="flex flex-col items-center"><div class="text-5xl mb-2">🔎</div><strong class="text-sm">1. Análise<br>de Impacto</strong></div>
+                    <div class="flex flex-col items-center"><div class="text-5xl mb-2">🎯</div><strong class="text-sm">2. Foco<br>Estratégico</strong></div>
+                    <div class="flex flex-col items-center"><div class="text-5xl mb-2">🏆</div><strong class="text-sm">3. Excelência na<br>Construção</strong></div>
+                </div>`
+            },
+            {
+                title: "Pilar 1: Análise de Impacto",
+                subtitle: "Compreendendo o 'porquê' antes de definir o 'como'",
+                content: `Antes de iniciar uma implementação, nossa primeira tarefa é investigar:
+                <ul class="list-disc list-inside space-y-2 mt-4 text-slate-600">
+                    <li>Qual processo de negócio estamos otimizando ou criando?</li>
+                    <li>Como esta mudança afeta a produtividade e a experiência do usuário final?</li>
+                    <li>Quais são as dependências e os riscos sistêmicos desta alteração?</li>
+                    <li>Existe uma abordagem alternativa que gere mais valor com menos complexidade?</li>
+                </ul>
+                <p class="mt-4 font-semibold">A clareza sobre o propósito da demanda é o primeiro passo para uma solução de qualidade.</p>`,
+                 visual: () => `<div class="text-8xl">🤔🔎</div>`
+            },
+            {
+                title: "Pilar 2: Foco Estratégico",
+                subtitle: "Priorizando o que gera mais valor",
+                content: `Recebemos diversas solicitações. Nossa responsabilidade é discernir e priorizar com base em critérios de negócio, entendendo a urgência real por trás de cada pedido.
+                <ul class="list-disc list-inside space-y-2 mt-4">
+                    <li><strong>Criticidade para o Cliente:</strong> A tarefa resolve um problema que impede a operação do cliente?</li>
+                    <li><strong>Valor para o Negócio:</strong> A funcionalidade melhora um fluxo de trabalho chave ou abre novas oportunidades?</li>
+                    <li><strong>Esforço vs. Impacto:</strong> O benefício gerado justifica o esforço de desenvolvimento?</li>
+                </ul>
+                <p class="mt-4 font-semibold bg-sky-50 p-3 rounded-lg border-l-4 border-sky-500">Nosso foco deve ser em tarefas de <strong>Alto Impacto</strong>, começando pelas mais <strong>Críticas</strong>.</p>`,
+                visual: () => `<div class="text-8xl">🎯</div>`
+            },
+            {
+                title: "O Termômetro da Urgência",
+                subtitle: "Entendendo o impacto real no cliente",
+                content: `Nossa capacidade de sentir a urgência do cliente define nosso valor estratégico.
+                <ul class="list-none space-y-3 mt-4">
+                    <li><span class="font-bold text-red-600">🚨 Nível Máximo (Processo Parado):</span> O cliente não consegue faturar, expedir ou operar. <strong>Ação imediata é inegociável.</strong></li>
+                    <li><span class="font-bold text-amber-600">⏱️ Nível Alto (Projeto Essencial):</span> Um projeto chave para o sucesso do cliente depende da nossa entrega. <strong>Nosso foco garante o plano do cliente.</strong></li>
+                    <li><span class="font-bold text-sky-600">💡 Nível Médio (Otimização de Valor):</span> Uma melhoria que gera grande ganho de produtividade ou reduz custos significativamente.</li>
+                </ul>`,
+                visual: () => `<div class="text-8xl">🌡️</div>`
+            },
+            {
+                title: "Pilar 3: Excelência na Construção",
+                subtitle: "Nossos princípios são a materialização da nossa visão",
+                content: `A qualidade do nosso produto é um reflexo direto do nosso rigor técnico. Nossos princípios de desenvolvimento são a base que garante que a visão de negócio se transforme em um software robusto, legível e de fácil manutenção.
+                <div class="mt-6 p-4 bg-slate-50 border-l-4 border-sky-600 text-slate-800 font-semibold text-center rounded-r-lg">
+                    Análise de Impacto + Foco Estratégico + Princípios = Engenharia de Valor
+                </div>`,
+                visual: () => `<div class="w-32 h-24 flex items-center justify-center space-x-4"><div class="text-5xl text-slate-700">⚙️</div><div class="text-3xl text-slate-300">➔</div><div class="text-5xl text-sky-600">🏆</div></div>`
+            },
+            {
+                title: "Do Pilar à Prática: A Mentalidade de 'Dono do Produto'",
+                subtitle: "Colocando-se no lugar de quem usa nosso software",
+                content: `Esta mentalidade significa ter empatia e responsabilidade pelo sucesso do usuário.
+                <ul class="list-disc list-inside space-y-2 mt-4">
+                    <li><strong>Sentir a Urgência do Cliente:</strong> Se o cliente está parado, nós também estamos. A prioridade dele é a nossa.</li>
+                    <li><strong>Antecipar Necessidades:</strong> Pensar além do que foi pedido. O que tornaria esta tela realmente eficiente?</li>
+                    <li><strong>Simplificar a Complexidade:</strong> Como podemos tornar um processo complexo em algo intuitivo na interface?</li>
+                    <li><strong>Assumir a Qualidade:</strong> Sentir-se responsável pela experiência completa, do clique ao resultado.</li>
+                </ul>`,
+                visual: () => `<div class="text-8xl">👤💡</div>`
+            },
+            {
+                title: "Do Pilar à Prática: A Mentalidade de 'Arquiteto do Negócio'",
+                subtitle: "Construindo hoje as bases para o sucesso de amanhã",
+                content: `Esta mentalidade foca na sustentabilidade e no futuro do software e da empresa.
+                <ul class="list-disc list-inside space-y-2 mt-4">
+                    <li><strong>Visão de Longo Prazo:</strong> A solução que estou criando hoje será fácil de manter e expandir daqui a dois anos?</li>
+                    <li><strong>Estabilidade e Segurança:</strong> Quais os pontos de falha? Como posso garantir que a solução seja robusta e segura?</li>
+                    <li><strong>Evitar Débito Técnico:</strong> Optar pela solução correta e bem estruturada, em vez de um atalho que causará problemas futuros.</li>
+                </ul>`,
+                visual: () => `<div class="text-8xl">🏛️</div>`
+            },
+            {
+                title: "O Ciclo de Geração de Valor",
+                subtitle: "Como nosso trabalho diário impulsiona o todo",
+                content: "O impacto de um software bem construído cria um ciclo virtuoso que fortalece toda a empresa e nossos clientes.",
+                visual: () => `<div class="w-full h-full font-semibold text-xs sm:text-sm text-center flex items-center justify-center text-slate-800">
+                    <div class="space-y-1 sm:space-y-2">
+                        <div>Dev com Visão Estratégica</div>
+                        <div class="text-sky-600">↓</div>
+                        <div>Construção com Excelência</div>
+                        <div class="text-sky-600">↓</div>
+                        <div>Produto Estável e Eficiente (Yzidro)</div>
+                        <div class="text-sky-600">↓</div>
+                        <div>Cliente Produtivo e Satisfeito</div>
+                        <div class="text-sky-600">↓</div>
+                        <div>Sucesso e Crescimento da Domtec</div>
+                        <div class="text-sky-600">↓</div>
+                        <div>Fortalecimento e Inovação da Equipe</div>
+                    </div>
+                </div>`
+            },
+            {
+                title: "Nós Somos Engenheiros de Valor",
+                subtitle: "A importância de cada um de nós",
+                content: `A qualidade do nosso produto é a soma da excelência aplicada por cada um de nós. Cada decisão de arquitetura e cada funcionalidade bem pensada é uma contribuição direta para o motor que move a Domtec e seus clientes.
+                <div class="mt-6 p-4 bg-slate-50 border-l-4 border-sky-600 text-slate-800 font-semibold text-center rounded-r-lg">
+                    Seu trabalho não é apenas entregar tarefas. É construir o futuro da nossa empresa.
+                </div>`,
+                visual: () => `<div class="w-32 h-24 flex items-center justify-around">
+                     <div class="text-4xl">🎯</div>
+                     <div class="text-4xl">🏆</div>
+                     <div class="text-4xl">🚀</div>
+                </div>`
+            },
+            {
+                title: "Dúvidas e Próximos Passos",
+                subtitle: "Espaço aberto para ideias e colaboração",
+                content: "Vamos conversar sobre como podemos aplicar ainda mais essa visão em nosso dia a dia e quais os desafios que podemos superar juntos.",
+                visual: () => `<div class="text-8xl">❓💬</div>`
+            }
+        ];
+
+        let currentSlide = 0;
+        const presentationContainer = document.getElementById('presentation-container');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+        const slideCounter = document.getElementById('slide-counter');
+        const progressDotsContainer = document.getElementById('progress-dots');
+        
+        function createVisual(slide) {
+            if (typeof slide.visual === 'function') {
+                return slide.visual();
+            }
+            return '';
+        }
+
+        function renderSlide(index) {
+            const slide = slidesData[index];
+            const visualHtml = createVisual(slide);
+            
+            const slideHtml = `
+                <div id="slide-${index}" class="slide w-full h-full flex flex-col md:flex-row items-center justify-center overflow-y-auto">
+                    <div class="flex-shrink-0 md:hidden my-6 flex items-center justify-center h-24">
+                        ${visualHtml}
+                    </div>
+                    <div class="w-full flex flex-col justify-center text-center md:text-left md:w-3/5 md:pr-10">
+                        <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-slate-900">${slide.title}</h1>
+                        ${slide.subtitle ? `<h2 class="text-base sm:text-lg lg:text-xl font-semibold text-sky-600 mt-2">${slide.subtitle}</h2>` : ''}
+                        <div class="mt-4 sm:mt-6 text-slate-700 text-sm sm:text-base lg:text-lg leading-relaxed space-y-2">${slide.content}</div>
+                    </div>
+                    <div class="hidden md:flex w-2/5 h-full items-center justify-center bg-slate-50 rounded-2xl overflow-hidden">
+                        <div class="transform scale-125">
+                            ${visualHtml}
+                        </div>
+                    </div>
+                </div>
+            `;
+            presentationContainer.innerHTML = slideHtml;
+            
+            const slideElement = document.getElementById(`slide-${index}`);
+            slideElement.classList.remove('active');
+            void slideElement.offsetWidth;
+            slideElement.classList.add('active');
+        }
+
+        function updateControls() {
+            prevBtn.disabled = currentSlide === 0;
+            nextBtn.disabled = currentSlide === slidesData.length - 1;
+            slideCounter.textContent = `Slide ${currentSlide + 1} de ${slidesData.length}`;
+            
+            document.querySelectorAll('.progress-dot').forEach((dot, index) => {
+                dot.classList.toggle('bg-sky-600', index === currentSlide);
+                dot.classList.toggle('bg-slate-300', index !== currentSlide);
+            });
+        }
+
+        function showSlide(index) {
+            if (index < 0 || index >= slidesData.length) return;
+            currentSlide = index;
+            renderSlide(currentSlide);
+            updateControls();
+        }
+
+        function setupProgressDots() {
+            progressDotsContainer.innerHTML = '';
+            slidesData.forEach((_, index) => {
+                const dot = document.createElement('button');
+                dot.classList.add('progress-dot', 'w-3', 'h-3', 'rounded-full');
+                dot.addEventListener('click', () => showSlide(index));
+                progressDotsContainer.appendChild(dot);
+            });
+        }
+        
+        prevBtn.addEventListener('click', () => showSlide(currentSlide - 1));
+        nextBtn.addEventListener('click', () => showSlide(currentSlide + 1));
+        
+        document.addEventListener('keydown', (e) => {
+            if(e.key === 'ArrowRight') {
+                if (nextBtn.disabled) return;
+                showSlide(currentSlide + 1);
+            } else if (e.key === 'ArrowLeft') {
+                if (prevBtn.disabled) return;
+                showSlide(currentSlide - 1);
+            }
+        });
+
+        // Initial setup
+        setupProgressDots();
+        showSlide(0);
+    </script>
+</body>
+</html>
